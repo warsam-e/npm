@@ -9,7 +9,7 @@ export const _npm_registry_search = (text: string, offset: number) =>
 			searchScore: number;
 			package: {
 				name: string;
-				keywords: string[];
+				keywords?: string[];
 				version: string;
 				description?: string;
 				sanitized_name: string;
@@ -39,9 +39,9 @@ export interface NPMRegistryResponse {
 	bugs?: Record<'url', string>;
 	license?: string;
 	homepage: string;
-	keywords: Array<string>;
+	keywords?: Array<string>;
 	repository?: { type: string; url?: string };
-	description: string;
+	description?: string;
 	contributors?: Array<Handler>;
 	maintainers: Array<Handler>;
 	readme: string;
@@ -56,7 +56,7 @@ interface DistTags {
 interface Version {
 	name: string;
 	version: string;
-	keywords: Array<string>;
+	keywords?: Array<string>;
 	license: string;
 	_id: string;
 	maintainers: Array<Handler>;

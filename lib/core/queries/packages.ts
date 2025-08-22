@@ -13,7 +13,7 @@ export async function npm_search(text: string, offset = 0): Promise<NPMPackagesR
 		name: p.package.name,
 		version: p.package.version,
 		license: p.package.license ?? null,
-		keywords: p.package.keywords,
+		keywords: p.package.keywords ?? [],
 		description: p.package.description ?? null,
 		maintainers: p.package.maintainers.map((m) => ({
 			name: m.username,
