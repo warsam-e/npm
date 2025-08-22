@@ -14,7 +14,7 @@ export async function npm_search(text: string, offset = 0): Promise<NPMPackagesR
 		version: p.package.version,
 		license: p.package.license ?? null,
 		keywords: p.package.keywords,
-		description: p.package.description,
+		description: p.package.description ?? null,
 		maintainers: p.package.maintainers.map((m) => ({
 			name: m.username,
 			email: m.email,

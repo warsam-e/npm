@@ -18,7 +18,7 @@ function check_package_partial(data: NPMPackagePartial) {
 	expect(data.version).toBeString();
 	expect(data.keywords).toBeArray();
 	for (const kw of data.keywords) expect(kw).toBeString();
-	expect(data.description).toBeString();
+	expect(data.description).toBeOneOf([null, expect.any(String)]);
 	expect(data.maintainers).toBeArray();
 	for (const m of data.maintainers) {
 		expect(m).toBeObject();
@@ -46,7 +46,7 @@ function check_package(data: NPMPackage) {
 		expect(version.name).toBeString();
 		expect(version.version).toBeString();
 		expect(version.added_at).toBeString();
-		expect(version.repository).toBeString();
+		expect(version.repository).toBeOneOf([null, expect.any(String)]);
 	}
 }
 

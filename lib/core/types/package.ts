@@ -30,7 +30,7 @@ export const _npm_schema_package_partial = t.Object({
 	license: t.Nullable(t.String()),
 	version: t.String(),
 	keywords: t.Array(t.String()),
-	description: t.String(),
+	description: t.Nullable(t.String()),
 	maintainers: t.Array(_package_handler),
 	modified_at: t.String({ format: 'date-time' }),
 });

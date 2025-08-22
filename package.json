@@ -1,7 +1,7 @@
 {
 	"name": "@warsam-e/npm",
 	"description": "Get information about a package or user from the NPM registry.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -20,7 +20,8 @@
 		"build:lib": "tsdown",
 		"build:docs": "typedoc --options typedoc.json",
 		"build": "bun build:lib && bun build:docs",
-		"dev": "bun test --watch"
+		"dev": "bun test --watch",
+		"dev:one": "bun dev -- --test-name-pattern"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.0",

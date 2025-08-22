@@ -26,7 +26,7 @@ const _format_version = ({
 });
 
 function _format_repo(repo: NPMRegistryResponse['repository']) {
-	if (!repo) return null;
+	if (!repo?.url) return null;
 	const orig = new URL(repo.url);
 	const url = new URL('https://github.com');
 	url.pathname = orig.pathname.replace(/\.git$/, '');
@@ -67,7 +67,7 @@ export async function npm_package(name: string): Promise<NPMPackage> {
 		license: raw.license ?? null,
 		version: latest.version,
 		typings,
-		description: latest.description,
+		description: latest.description ?? null,
 		keywords: latest.keywords,
 		homepage: latest.homepage ?? null,
 		repository: _format_repo(latest.repository),

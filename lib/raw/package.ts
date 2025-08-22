@@ -11,7 +11,7 @@ export const _npm_registry_search = (text: string, offset: number) =>
 				name: string;
 				keywords: string[];
 				version: string;
-				description: string;
+				description?: string;
 				sanitized_name: string;
 				publisher: { email: string; username: string; actor?: { name: string; type: string; email: string } };
 				maintainers: Array<{ email: string; username: string }>;
@@ -40,7 +40,7 @@ export interface NPMRegistryResponse {
 	license?: string;
 	homepage: string;
 	keywords: Array<string>;
-	repository?: Record<'type' | 'url', string>;
+	repository?: { type: string; url?: string };
 	description: string;
 	contributors?: Array<Handler>;
 	maintainers: Array<Handler>;
@@ -72,7 +72,7 @@ interface Version {
 	_npmUser: Record<'name' | 'email', string>;
 	repository?: Record<'type' | 'url', string>;
 	_npmVersion: string;
-	description: string;
+	description?: string;
 	directories: Record<string, unknown>;
 	_nodeVersion: string;
 	_hasShrinkwrap: boolean;
