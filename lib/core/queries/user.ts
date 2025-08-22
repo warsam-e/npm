@@ -9,11 +9,11 @@ export async function npm_user(username: string): Promise<NPMUser> {
 		username,
 		name: user.name ?? null,
 		avatar: user.avatar ?? null,
+		packages_count: _packages?.total ?? 0,
 		contact: {
 			email: user.email ?? null,
 			github: user.github ?? null,
 			twitter: user.twitter ?? null,
 		},
-		packages_count: _packages?.total ?? 0,
 	};
 }

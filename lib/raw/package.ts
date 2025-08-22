@@ -33,7 +33,7 @@ export interface NPMRegistryResponse {
 	_id: string;
 	_rev: string;
 	name: string;
-	'dist-tags': DistTags;
+	'dist-tags'?: DistTags;
 	versions: Record<string, Version>;
 	time: Time;
 	bugs?: Record<'url', string>;

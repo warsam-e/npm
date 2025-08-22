@@ -1,5 +1,10 @@
+import { Value } from '@sinclair/typebox/value';
 import { expect, setDefaultTimeout, test } from 'bun:test';
+import type { Static, TSchema } from 'elysia';
 import {
+	_npm_schema_package,
+	_npm_schema_package_partial,
+	_npm_schema_packages_response,
 	npm_package,
 	npm_packages,
 	npm_search,
@@ -10,6 +15,17 @@ import {
 } from './core';
 
 setDefaultTimeout(10000000);
+
+function _check_schema<T extends TSchema>(data: Static<T>, schema: T) {
+	let val = false;
+	try {
+		Value.Decode(schema, data);
+		val = true;
+	} catch {
+		console.log([...Value.Errors(schema, data)].map((e) => [...e.errors].flatMap((e) => [...e])));
+	}
+	return expect(val).toBe(true);
+}
 
 function check_package_partial(data: NPMPackagePartial) {
 	expect(data).toBeObject();
@@ -26,6 +42,7 @@ function check_package_partial(data: NPMPackagePartial) {
 		expect(m.email).toBeString();
 	}
 	expect(data.modified_at).toBeString();
+	_check_schema(data, _npm_schema_package_partial);
 }
 
 function check_package(data: NPMPackage) {
@@ -48,6 +65,7 @@ function check_package(data: NPMPackage) {
 		expect(version.added_at).toBeString();
 		expect(version.repository).toBeOneOf([null, expect.any(String)]);
 	}
+	_check_schema(data, _npm_schema_package);
 }
 
 function check_packages_response(data: NPMPackagesResponse) {
@@ -57,6 +75,7 @@ function check_packages_response(data: NPMPackagesResponse) {
 	expect(data.info.next).toBeOneOf([null, expect.any(Number)]);
 	expect(data.list).toBeArray();
 	for (const pkg of data.list) check_package_partial(pkg);
+	_check_schema(data, _npm_schema_packages_response);
 }
 
 test('search:packages', async () => {

@@ -45,11 +45,20 @@ const _format_handler = (
 	email: maintainer.email,
 });
 
+function url_or_null(url?: string) {
+	if (!url) return null;
+	try {
+		return new URL(url).toString();
+	} catch {}
+	return null;
+}
+
 export async function npm_package(name: string): Promise<NPMPackage> {
 	const raw = await try_prom(_npm_registry_package(name));
 	if (!raw) throw new Error('Failed to fetch package info');
 
-	const latest_version = raw['dist-tags'].latest;
+	const latest_version = raw['dist-tags']?.latest;
+	if (!latest_version) throw new Error('Package unavailable. Likely unpublished.');
 	const latest = raw.versions[latest_version];
 	if (!latest) throw new Error('Package is missing latest version, somehow.');
 
@@ -74,7 +83,7 @@ export async function npm_package(name: string): Promise<NPMPackage> {
 		typings,
 		description: latest.description ?? null,
 		keywords: latest.keywords ?? [],
-		homepage: latest.homepage ?? null,
+		homepage: url_or_null(latest.homepage),
 		repository: _format_repo(latest.repository),
 		bugs: latest.bugs?.url ?? null,
 		created_at: raw.time.created,
