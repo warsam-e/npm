@@ -1,0 +1,23 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"entryPoints": ["lib/index.ts"],
+	"out": "docs",
+	"plugin": ["typedoc-github-theme"],
+	"excludeExternals": true,
+	"logLevel": "Verbose",
+	"cleanOutputDir": true,
+	"externalSymbolLinkMappings": {
+		"@sinclair/typebox": {
+			"*": "https://github.com/sinclairzx81/typebox"
+		},
+		"typescript": {
+			"Promise": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+			"Error": "https://developer.mozilla.org/en-US/dozcs/Web/JavaScript/Reference/Global_Objects/Error"
+		}
+	},
+	"navigationLinks": {
+		"GitHub": "https://github.com/warsam-e/npm",
+		"My Site": "https://warsame.me"
+	},
+	"sort": ["documents-first", "kind"]
+}
